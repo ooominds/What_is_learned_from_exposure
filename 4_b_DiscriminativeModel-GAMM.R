@@ -7,21 +7,21 @@ options(show.signif.stars=FALSE)
 
 load('discr_data.rda')
 
-# numeric, boolean if a word has u- ending
+# numeric, boolean if a word has the genitive u- ending
 discr_data$isU = as.numeric(discr_data$ending == 'u')
 
-# removing influential data points (extreme values and outlyers)
+# removing influential data points (extreme values and outliers)
 discr_data2 = discr_data[discr_data$G2F.WordEndDiversity > -2.2 &
         discr_data$G2F.WordEndDiversity < 2.7,]
 
-# with this we have lost 83 data points
+# with this we lost 83 data points
 (nrow(discr_data) - nrow(discr_data2))
 
 ############
 ### GAMM ###
 ############
 
-### NOTE: Comparing models with less number of knots always give
+### NOTE: Comparing models with fewer knots always gives a
 ###       significantly poorer fit. So, we are keeping it maximal.
 
 summary(discr_data2.gam.FINAL <- bam(isU ~
