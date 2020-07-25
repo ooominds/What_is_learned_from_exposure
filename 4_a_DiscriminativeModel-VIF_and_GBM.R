@@ -10,7 +10,7 @@ set.seed(1828)
 
 load('discr_data.rda')
 
-# numeric, boolean if a word has u- ending
+# numeric, boolean if a word has a genitive u- ending
 discr_data$isU = as.numeric(discr_data$ending == 'u')
 
 ####################
@@ -37,14 +37,13 @@ print(m, na.print='')
 # C2F.Prior                            0.01             0.04          
 # C2F.Typicality                       0.02             0.03      0.73
 
-# G2F.Activation and G2F.Prior seems suspicious to causing the
-# multicollinearity. When we remove them, the problem is not severe
-# anymore.
+# G2F.Activation and G2F.Prior seem to be causing multicollinearity.
+# When we remove them, the problem is no longer severe.
 
 vifcor(discr_data[,9:13], th=0.75)
-# No variable from the 5 input variables has collinearity problem. 
+# No variable from the 5 input variables has a collinearity problem. 
 # 
-# The linear correlation coefficients ranges between: 
+# The linear correlation coefficients range between: 
 # min correlation ( C2F.Prior ~ G2F.WordEndDiversity ):  0.01119378 
 # max correlation ( C2F.Typicality ~ C2F.Prior ):  0.7303349 
 # 
@@ -60,8 +59,8 @@ vifcor(discr_data[,9:13], th=0.75)
 ### GBM ###
 ###########
 
-### NOTE: cv.folds parameter in gbm() causes error. This is often
-###       the case, especially when new version of the package is
+### NOTE: the cv.folds parameter in gbm() causes error. This is often
+###       the case, especially when a new version of the package is
 ###       deposited on CRAN. I have turned it off but please give
 ###       it a try by uncommenting: remove ) and #.
 
@@ -103,7 +102,7 @@ print(sum.gbm2 <- summary(gbm2, plotit=FALSE), row.names=FALSE)
 
 # -----
 
-# Adding Phonologically Typical variable and remove all 'atypical'
+# Adding the Phonologically Typical variable and removing all 'atypical'
 # instances, which will cause significant data loss.
 gbmdat2 = droplevels(discr_data[discr_data$phon_typical %in% c('a', 'u'),
     c(14,3,5,9,10,11,12,13)])
