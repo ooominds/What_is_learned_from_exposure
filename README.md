@@ -1,4 +1,4 @@
-# What_is_learned_from_exposure
+# What is learned from exposure: an error-driven approach to productivity in language
 
 <br>
 
