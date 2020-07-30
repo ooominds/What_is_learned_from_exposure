@@ -19,7 +19,7 @@ load('exp_data.rda')
 # Model fit: GAMM
 #####################
 
-### We used used 3 knots to make the partial effect curve smoother
+### We used 3 knots to make the partial effect curve smoother
 summary(exp_gamm <- bam(Response ~
     s(G2F.WordEndDiversity, k=3) +
     s(ParticipantNo, bs='re') +
